@@ -5,7 +5,7 @@ node {
    stage('build') {
       sh '''
          mvn clean
-		 mvn package -DskipTest
+		 mvn package -DskipTests
          cd target
          cp ../src/main/resources/web.config web.config
          mv spring-boot-0.0.1-SNAPSHOT.jar app.jar
