@@ -4,7 +4,8 @@ node {
    }
    stage('build') {
       sh '''
-         mvn clean package -DskipTest
+         mvn clean
+		 mvn package -DskipTest
          cd target
          cp ../src/main/resources/web.config web.config
          mv spring-boot-0.0.1-SNAPSHOT.jar app.jar
@@ -12,7 +13,7 @@ node {
    }
    stage('deploy') {
 	  echo '000000000000000000'
-	  echo $JAVA_HOME
+	  sh 'echo $JAVA_HOME'
    
       azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID,
       resourceGroup: env.RES_GROUP, appName: env.WEB_APP, filePath: "*.*", sourceDirectory: "target"
