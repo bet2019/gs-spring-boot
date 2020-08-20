@@ -9,6 +9,7 @@ node {
          cd target
          cp ../src/main/resources/web.config web.config
          mv spring-boot-0.0.1-SNAPSHOT.jar app.jar
+		 zip todo.zip app.jar web.config
       '''
    }
    stage('deploy') {
@@ -16,6 +17,6 @@ node {
 	  sh 'echo $JAVA_HOME'
    
       azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID,
-      resourceGroup: env.RES_GROUP, appName: env.WEB_APP, filePath: "*.*", sourceDirectory: "target"
+      resourceGroup: env.RES_GROUP, appName: env.WEB_APP, filePath: "**/todo.zip"
    }
 }
