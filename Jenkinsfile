@@ -12,10 +12,7 @@ node {
 		 zip todo.zip app.jar web.config
       '''
    }
-   stage('deploy') {
-	  echo '000000000000000000'
-	  sh 'echo $JAVA_HOME'
-   
+   stage('deploy') {   
       azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID,
       resourceGroup: env.RES_GROUP, appName: env.WEB_APP, filePath: "**/todo.zip"
    }
